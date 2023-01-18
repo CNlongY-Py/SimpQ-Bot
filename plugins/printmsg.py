@@ -1,3 +1,4 @@
+# 内置插件 #
 PLUGINFO = {
     "name": "PrintMsg",
     "version": "0.0.1",
