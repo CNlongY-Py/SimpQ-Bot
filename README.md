@@ -84,11 +84,11 @@ servers:
 **go-cqhttp和SimpQ必须同时运行,缺一不可!!!**
 SimpQ点击start.py启动(推荐使用命令行python -m start.py启动)
 go-cqhttp点击go-cqhttp.bat启动
-***
+
 ## 插件的开发 ##
 请阅读doc文件夹内**插件开发指南.md**
 
-***
+
 ## SimpQ Toolkit 
 *本工具箱为新手打造,不推荐老手使用*
 >仍在开发,预计将于SimpQ b0.2发布时推出
