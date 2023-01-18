@@ -43,9 +43,13 @@ a(alpha),b(beta),c(classic),RC(Release Candidate)
 安装go-cqhttp
 --------------
 点击 [go-cqhttp版本列表](https://github.com/Mrs4s/go-cqhttp/releases) 来选择适合你系统的版本
+
 放到go-cqhttp后启动会生成配置文件
+
 请选择HTTP通信
+
 配置文件生成后完成后打开config.yml
+
 修改你的账号密码
 ```
 account: # 账号相关
