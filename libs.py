@@ -14,7 +14,7 @@ def HTTP(url):
     return http
 
 
-def sendMsg(msg, uid=0, gid=0):  # 发送消息(若gid未传入则默认私聊,uid相反)
+def sendMsg(msg, gid=0, uid=0):  # 发送消息(若gid未传入则默认私聊,uid相反)
     if gid:
         return HTTP("/send_group_msg?group_id=%s&message=%s" % (gid, bot.replacestr(msg, uid=uid, gid=gid)))
     elif uid:
