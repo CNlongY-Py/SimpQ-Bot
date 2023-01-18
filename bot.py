@@ -8,7 +8,7 @@ import libs
 
 # ------公共变量区-------
 loglevel = logging.INFO  # 日志等级
-debug = False  # debug模式
+debug = True  # debug模式
 initHost = "127.0.0.1"  # 监听服务器HOST
 initPort = 5701  # 监听服务器端口
 version = "a0.1"  # 版本号
@@ -18,11 +18,13 @@ thread = True  # 多线程选项
 # ------内置函数区-------
 def replacestr(msg, uid=0, gid=0):  # 文字渲染模板
     msg = msg.replace("{{time}}", time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
-    msg = msg.replace("{{uid}}", str(uid))
-    msg = msg.replace("{{gid}}", str(gid))
-    msg = msg.replace("{{gname}}", libs.getGroupInfo(gid)["group_name"])
-    msg = msg.replace("{{uname}}", libs.getStargerInfo(uid)["nickname"])
-    msg = msg.replace("{{ucard}}", libs.getGroupUserInfo(gid, uid)["card"])
+    if gid:
+        msg = msg.replace("{{gid}}", str(gid))
+        msg = msg.replace("{{gname}}", libs.getGroupInfo(gid)["group_name"])
+    if uid:
+        msg = msg.replace("{{uid}}", str(uid))
+        msg = msg.replace("{{uname}}", libs.getStargerInfo(uid)["nickname"])
+        msg = msg.replace("{{ucard}}", libs.getGroupUserInfo(gid, uid)["card"])
     return msg
 
 
@@ -58,7 +60,7 @@ def getLog(name):  # 获取日志实例,初始化日志输出
 
 
 def checkUpdate():  # 检查更新(预计于下个版本发布)
-    return "b0.1"
+    return "a0.1"
 
 
 # ------核心函数区------
@@ -106,9 +108,9 @@ def loadplugin(rjson, type):  # 载入插件
     pluginslist = os.listdir("./plugins")
     for i in pluginslist:
         name = i.split(".")[0]
-        if i.find("disload") == -1 and i.find(".py") != -1:
+        if i.find("disload") == -1 and i != "__pycache__":
             getPlugin = pluginLoad(name)
-            log = getLog(name)
+            log = getLog(getPlugin.PLUGINFO["name"])
             if thread:
                 createThread(runPlugin, (getPlugin, rjson, type, log))
             else:
