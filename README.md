@@ -12,7 +12,7 @@ pip install flask
 
 **建议Python版本3.10.9**
 
-
+如果你在使用过程中发现任何问题，可以 提交 issue 或自行 fork 修改后提交 pull request. ~~随缘修bug~~
 
 SimpQ基础的文件目录
 -----------------
