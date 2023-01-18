@@ -1,11 +1,9 @@
 # SimpQ #
-==================
 ## 安装操作使用指南 ##
 SimpQ使用Python编写且基于[go-cqhttp](https://github.com/Mrs4s/go-cqhttp)的QQBot框架
 遵循GPL 3.0开源协议
 **建议Python版本3.10.9**
 
----
 
 
 SimpQ基础的文件目录
@@ -29,7 +27,7 @@ main.py Bot的监听器
 start.py 启动Bot框架
 
 ### 懒人化安装请看下方SimpQ Toolkit ###
-***
+
 SimpQ版本
 --------------
 SimpQ及其小工具通常分为3个版本
@@ -38,7 +36,7 @@ a(alpha),b(beta),c(classic),RC(Release Candidate)
 - b  为项目的测试版本,较为稳定
 - c  为项目的正式版本,为b版本稳定运行一段时间后转为稳定版本
 - RC 为项目正式版本的附加版本(类似于DLC?),会修复c版本的一些bug和增加一些新的特性
-***
+
 ## 安装使用SimpQ ##
 安装go-cqhttp
 --------------
