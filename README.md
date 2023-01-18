@@ -1,11 +1,11 @@
-# SimpQ#
-==================
+# SimpQ #
 ## 安装操作使用指南 ##
 SimpQ使用Python编写且基于[go-cqhttp](https://github.com/Mrs4s/go-cqhttp)的QQBot框架
 
+遵循GPL 3.0开源协议
+
 **建议Python版本3.10.9**
 
----
 
 
 SimpQ基础的文件目录
@@ -19,17 +19,17 @@ SimpQ基础的文件目录
 - main.py
 - start.py
 
-go-cqhttp 文件夹用来放置go-cqhttp的发行版
-logs 用来存放Bot的日志文件
-plugins 用来存放插件文件
-pluglibs 用来存放插件的前置库
-bot.py Bot的插件载入系统
-libs.py go-cqhttp的API(截至目前已全部兼容可用API)
-main.py Bot的监听器
-start.py 启动Bot框架
+- go-cqhttp 文件夹用来放置go-cqhttp的发行版
+- logs 用来存放Bot的日志文件
+- plugins 用来存放插件文件
+- pluglibs 用来存放插件的前置库
+- bot.py Bot的插件载入系统
+- libs.py go-cqhttp的API(截至目前已全部兼容可用API)
+- main.py Bot的监听器
+- start.py 启动Bot框架
 
 ### 懒人化安装请看下方SimpQ Toolkit ###
-***
+
 SimpQ版本
 --------------
 SimpQ及其小工具通常分为3个版本
@@ -38,14 +38,18 @@ a(alpha),b(beta),c(classic),RC(Release Candidate)
 - b  为项目的测试版本,较为稳定
 - c  为项目的正式版本,为b版本稳定运行一段时间后转为稳定版本
 - RC 为项目正式版本的附加版本(类似于DLC?),会修复c版本的一些bug和增加一些新的特性
-***
+
 ## 安装使用SimpQ ##
 安装go-cqhttp
 --------------
-点击** [go-cqhttp版本列表](https://github.com/Mrs4s/go-cqhttp/releases) **来选择适合你系统的版本
+点击 [go-cqhttp版本列表](https://github.com/Mrs4s/go-cqhttp/releases) 来选择适合你系统的版本
+
 放到go-cqhttp后启动会生成配置文件
+
 请选择HTTP通信
+
 配置文件生成后完成后打开config.yml
+
 修改你的账号密码
 ```
 account: # 账号相关
@@ -84,13 +88,15 @@ servers:
 启动SimpQ和go-cqhttp
 -------------------
 **go-cqhttp和SimpQ必须同时运行,缺一不可!!!**
+
 SimpQ点击start.py启动(推荐使用命令行python -m start.py启动)
+
 go-cqhttp点击go-cqhttp.bat启动
-***
+
 ## 插件的开发 ##
 请阅读doc文件夹内**插件开发指南.md**
 
-***
+
 ## SimpQ Toolkit 
 *本工具箱为新手打造,不推荐老手使用*
 >仍在开发,预计将于SimpQ b0.2发布时推出
