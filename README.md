@@ -1,4 +1,9 @@
 # SimpQ-Bot #
+![LOGO](/doc/logo.png "LOGO")
+
+Plugins:[插件仓库](https://github.com/CNlongY-Py/SimpQ-Plugin/)
+QQGroup:[SimpQ 社区 556990446](https://qm.qq.com/cgi-bin/qm/qr?k=d5jHYYrg1XkSwuvItCCWfWxcALOxqAeM&jump_from=webapi&authKey=Qtw/AoANvNmCcSeSH9IqafXqbToZRE5aFuUtZuWJpKMmVaALfw2P9zp8orX6czjZ)
+
 ## 安装操作使用指南 ##
 SimpQ使用Python编写且基于[go-cqhttp](https://github.com/Mrs4s/go-cqhttp)的QQBot框架
 
