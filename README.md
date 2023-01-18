@@ -123,4 +123,5 @@ go-cqhttp点击go-cqhttp.bat启动
 - SimpBug.py 伪go-cqhttp,可以自定义命令,用来给插件Debug(目前仅有alpha版本)
 - 加速开发中...
 
-## 官方Bot Yogurt酱 QQ:3526457644
+## 官方Bot
+Yogurt酱 QQ:3526457644
