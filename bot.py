@@ -8,10 +8,10 @@ import libs
 
 # ------公共变量区-------
 loglevel = logging.INFO  # 日志等级
-debug = True  # debug模式
+debug = False  # debug模式
 initHost = "127.0.0.1"  # 监听服务器HOST
 initPort = 5701  # 监听服务器端口
-version = "a0.1"  # 版本号
+version = "b0.1"  # 版本号
 thread = True  # 多线程选项
 
 
@@ -21,7 +21,7 @@ def replacestr(msg, uid=0, gid=0):  # 文字渲染模板
     if gid:
         msg = msg.replace("{{gid}}", str(gid))
         msg = msg.replace("{{gname}}", libs.getGroupInfo(gid)["group_name"])
-    if uid:
+    else:
         msg = msg.replace("{{uid}}", str(uid))
         msg = msg.replace("{{uname}}", libs.getStargerInfo(uid)["nickname"])
         msg = msg.replace("{{ucard}}", libs.getGroupUserInfo(gid, uid)["card"])
