@@ -4,6 +4,12 @@ SimpQ使用Python编写且基于[go-cqhttp](https://github.com/Mrs4s/go-cqhttp)�
 
 遵循GPL 3.0开源协议
 
+安装flask,requests
+```
+pip install requests
+pip install flask
+```
+
 **建议Python版本3.10.9**
 
 
