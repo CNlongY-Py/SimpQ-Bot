@@ -1,4 +1,4 @@
-# SimpQ #
+# SimpQ-Bot #
 ## 安装操作使用指南 ##
 SimpQ使用Python编写且基于[go-cqhttp](https://github.com/Mrs4s/go-cqhttp)的QQBot框架
 
