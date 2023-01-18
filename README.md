@@ -122,3 +122,5 @@ go-cqhttp点击go-cqhttp.bat启动
 - CNetSDK.py 需要搭配插件connectSDK.py一并使用 远程连接到机器人终端并输出日志信息打印到控制台
 - SimpBug.py 伪go-cqhttp,可以自定义命令,用来给插件Debug(目前仅有alpha版本)
 - 加速开发中...
+
+## 官方Bot Yogurt酱 QQ:3526457644
