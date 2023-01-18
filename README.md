@@ -19,14 +19,14 @@ SimpQ基础的文件目录
 - main.py
 - start.py
 
-go-cqhttp 文件夹用来放置go-cqhttp的发行版
-logs 用来存放Bot的日志文件
-plugins 用来存放插件文件
-pluglibs 用来存放插件的前置库
-bot.py Bot的插件载入系统
-libs.py go-cqhttp的API(截至目前已全部兼容可用API)
-main.py Bot的监听器
-start.py 启动Bot框架
+- go-cqhttp 文件夹用来放置go-cqhttp的发行版
+- logs 用来存放Bot的日志文件
+- plugins 用来存放插件文件
+- pluglibs 用来存放插件的前置库
+- bot.py Bot的插件载入系统
+- libs.py go-cqhttp的API(截至目前已全部兼容可用API)
+- main.py Bot的监听器
+- start.py 启动Bot框架
 
 ### 懒人化安装请看下方SimpQ Toolkit ###
 
@@ -88,7 +88,9 @@ servers:
 启动SimpQ和go-cqhttp
 -------------------
 **go-cqhttp和SimpQ必须同时运行,缺一不可!!!**
+
 SimpQ点击start.py启动(推荐使用命令行python -m start.py启动)
+
 go-cqhttp点击go-cqhttp.bat启动
 
 ## 插件的开发 ##
