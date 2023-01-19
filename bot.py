@@ -5,15 +5,16 @@ import os
 import importlib
 import _thread
 import libs
+import requests
 
 # ------公共变量区-------
 loglevel = logging.INFO  # 日志等级
-debug = False  # debug模式
+debug = True  # debug模式
 initHost = "127.0.0.1"  # 监听服务器HOST
 initPort = 5701  # 监听服务器端口
-version = "b0.1"  # 版本号
+version = "c0.1"  # 版本号
 thread = True  # 多线程选项
-
+botstatus = False # 检测Bot是否离线(Bug很多,强烈不建议使用)
 
 # ------内置函数区-------
 def replacestr(msg, uid=0, gid=0):  # 文字渲染模板
@@ -21,9 +22,10 @@ def replacestr(msg, uid=0, gid=0):  # 文字渲染模板
     if gid:
         msg = msg.replace("{{gid}}", str(gid))
         msg = msg.replace("{{gname}}", libs.getGroupInfo(gid)["group_name"])
-    else:
+    if uid:
         msg = msg.replace("{{uid}}", str(uid))
         msg = msg.replace("{{uname}}", libs.getStargerInfo(uid)["nickname"])
+    if uid and gid:
         msg = msg.replace("{{ucard}}", libs.getGroupUserInfo(gid, uid)["card"])
     return msg
 
@@ -60,14 +62,21 @@ def getLog(name):  # 获取日志实例,初始化日志输出
 
 
 def checkUpdate():  # 检查更新(预计于下个版本发布)
-    return "a0.1"
+    return "c0.1"
 
 
 # ------核心函数区------
 def createThread(name, data):  # 线程创建器
     return _thread.start_new_thread(name, data)
 
-
+def getStatus():
+    log=getLog("BotStatus")
+    while True:
+        try:
+            requests.get(libs.ip+"/get_status")
+        except:
+            log.warning("Bot已离线,请检查是否IP配置错误")
+        time.sleep(3)
 def loadPlugLibs(list):
     log = getLog("loadLibs")
     libslist = {}
@@ -149,6 +158,9 @@ def initRun():  # 初始化运行
         log.error("未找到plugins文件夹")
         exit(1)
     log.info("自检完毕")
+    if botstatus:
+        log.info("Bot状态检测器已启动")
+        createThread(getStatus,())
     log.info("初始化插件")
     loadplugin(0, "init")
     log.info("开始监听消息")
@@ -163,8 +175,7 @@ def initData(json):  # 处理消息数据
             mid = json["message_id"]
             uid = json["user_id"]
             msg = json["message"]
-            subtype = json["subtype"]
-            rjson = {"subtype": subtype, "mid": mid, "uid": uid, "msg": msg, "time": time, "rawdata": json,
+            rjson = {"mid": mid, "uid": uid, "msg": msg, "time": time, "rawdata": json,
                      "msgtype": msgtype}
             loadplugin(rjson, ptype)
         elif msgtype == "group":
@@ -249,12 +260,12 @@ def initData(json):  # 处理消息数据
         elif ntype == "essence":
             subtype = json["sub_type"]
             gid = json["group_id"]
-            uid = json["user_id"]
             opid = json["operator_id"]
             sid = json["sender_id"]
-            rjson = {"time": time, "uid": uid, "ntype": ntype, "gid": gid, "opid": opid, "rawdata": json,
+            rjson = {"time": time, "ntype": ntype, "gid": gid, "opid": opid, "rawdata": json,
                      "subtype": subtype, "sid": sid}
-        loadplugin(rjson, ptype)
+        if rjson:
+            loadplugin(rjson, ptype)
     elif ptype == "request":
         rtype = json["request_type"]
         if rtype == "friend":
