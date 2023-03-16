@@ -6,13 +6,14 @@ import importlib
 import _thread
 import libs
 import requests
-
+import re
+import logging.handlers
 # ------公共变量区-------
 loglevel = logging.INFO  # 日志等级
 debug = True  # debug模式
 initHost = "127.0.0.1"  # 监听服务器HOST
 initPort = 5701  # 监听服务器端口
-version = "c0.1"  # 版本号
+version = "c0.1-RC1"  # 版本号
 thread = True  # 多线程选项
 botstatus = False # 检测Bot是否离线(Bug很多,强烈不建议使用)
 
@@ -49,20 +50,19 @@ def getLog(name):  # 获取日志实例,初始化日志输出
         logger.setLevel(loglevel)  # 未开DEBUG模式下的日志等级
     formator = logging.Formatter(fmt="%(asctime)s[%(levelname)s][%(name)s]:%(message)s", datefmt="%Y-%m-%d-%X")
     sh = logging.StreamHandler()
-    log_file = os.path.join("./logs", "{}.log".format(time.strftime("%Y-%m-%d", time.localtime())))
-    with open(log_file, "a") as f:
-        f.write("")
-    fh = logging.FileHandler(log_file, encoding="UTF-8")
+    fh = logging.handlers.TimedRotatingFileHandler(filename="./logs/{}.log".format(time.strftime("%Y-%m-%d", time.localtime())), when='MIDNIGHT',
+                                           interval=1, backupCount=3)
+    fh.extMatch = re.compile(r"^\d{4}-\d{2}-\d{2}.log$")
+
     if not logger.handlers:
         sh.setFormatter(formator)
-        fh.setFormatter(formator)
         logger.addHandler(sh)
-        logger.addHandler(fh)
+        fh.setFormatter(formator)
     return logger
 
 
 def checkUpdate():  # 检查更新(预计于下个版本发布)
-    return "c0.1"
+    return "c0.1-RC1"
 
 
 # ------核心函数区------
