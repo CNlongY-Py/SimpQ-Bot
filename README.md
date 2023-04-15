@@ -1,5 +1,5 @@
 # SimpQ-Bot #
-![LOGO](/doc/logo.png "LOGO")
+![LOGO](/doc/LOGO23-4.png "LOGO")
 
 Plugins:[插件仓库](https://github.com/CNlongY-Py/SimpQ-Plugin/)
 
