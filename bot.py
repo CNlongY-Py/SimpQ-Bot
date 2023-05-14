@@ -6,14 +6,13 @@ import importlib
 import _thread
 import libs
 import requests
-import re
-import logging.handlers
+
 # ------公共变量区-------
-loglevel = logging.INFO  # 日志等级
+loglevel = 1  # 日志等级
 debug = True  # debug模式
 initHost = "127.0.0.1"  # 监听服务器HOST
 initPort = 5701  # 监听服务器端口
-version = "c0.1-RC1"  # 版本号
+version = "c0.1-RC2"  # 版本号
 thread = True  # 多线程选项
 botstatus = False # 检测Bot是否离线(Bug很多,强烈不建议使用)
 
@@ -31,6 +30,8 @@ def replacestr(msg, uid=0, gid=0):  # 文字渲染模板
     return msg
 
 
+
+
 def disloadLog(debug=True):  # 控制接收输出
     if debug:
         state = False
@@ -41,28 +42,57 @@ def disloadLog(debug=True):  # 控制接收输出
     logging.getLogger("urllib3.connectionpool").disabled = state
     logging.getLogger("apscheduler.scheduler").disabled = state
 
+# 旧版日志系统
+# def getLog(name):  # 获取日志实例,初始化日志输出
+#     logger = logging.getLogger(name)  # 获得logging实例
+#     if logger.handlers:
+#         logger.removeHandler(name)
+#     if debug:
+#         logger.setLevel(logging.DEBUG)  # DEBUG模式
+#     else:
+#         logger.setLevel(loglevel)  # 未开DEBUG模式下的日志等级
+#     formator = logging.Formatter(fmt="%(asctime)s[%(levelname)s][%(name)s]:%(message)s", datefmt="%Y-%m-%d-%X")
+#     sh = logging.StreamHandler()
+#     log_file = os.path.join("./logs", "{}.log".format(time.strftime("%Y-%m-%d", time.localtime())))
+#     with open(log_file, "a") as f:
+#         f.write("")
+#     fh = logging.FileHandler(log_file, encoding="UTF-8")
+#     sh.setFormatter(formator)
+#     fh.setFormatter(formator)
+#     logger.addHandler(sh)
+#     logger.addHandler(fh)
+#     return logger
 
-def getLog(name):  # 获取日志实例,初始化日志输出
-    logger = logging.getLogger(name)  # 获得logging实例
-    if debug:
-        logger.setLevel(logging.DEBUG)  # DEBUG模式
-    else:
-        logger.setLevel(loglevel)  # 未开DEBUG模式下的日志等级
-    formator = logging.Formatter(fmt="%(asctime)s[%(levelname)s][%(name)s]:%(message)s", datefmt="%Y-%m-%d-%X")
-    sh = logging.StreamHandler()
-    fh = logging.handlers.TimedRotatingFileHandler(filename="./logs/{}.log".format(time.strftime("%Y-%m-%d", time.localtime())), when='MIDNIGHT',
-                                           interval=1, backupCount=3)
-    fh.extMatch = re.compile(r"^\d{4}-\d{2}-\d{2}.log$")
-
-    if not logger.handlers:
-        sh.setFormatter(formator)
-        logger.addHandler(sh)
-        fh.setFormatter(formator)
-    return logger
-
+# 新版日志系统
+def prlog(text):
+    with open("./logs/%s.log" % time.strftime("%Y-%m-%d", time.localtime()), "a",encoding="utf-8") as f:
+        f.write("%s\n"%text)
+class Logger:
+    def __init__(self,name,level):
+        self.name=name
+        self.formatp="%s"%time.strftime("%Y-%m-%d-%X", time.localtime())
+        self.level=level
+    def error(self,text):
+        if self.level<=4:
+            print(f"\033[0;31;40m{self.formatp}[ERROR]<{self.name}>:{text}\033[0m")
+            prlog(f"{self.formatp}[ERROR]<{self.name}>:{text}")
+    def warning(self,text):
+        if self.level<=3:
+            print(f"\033[0;33;40m{self.formatp}[WARNING]<{self.name}>:{text}\033[0m")
+            prlog(f"{self.formatp}[WARNING]<{self.name}>:{text}")
+    def info(self,text):
+        if self.level<=2:
+            print(f"{self.formatp}[INFO]<{self.name}>:{text}")
+            prlog(f"{self.formatp}[INFO]<{self.name}>:{text}")
+    def debug(self,text):
+        if self.level<=1:
+            print(f"{self.formatp}[DEBUG]<{self.name}>:{text}")
+            prlog(f"{self.formatp}[DEBUG]<{self.name}>:{text}")
+def getLog(name):
+    return Logger(name,loglevel)
 
 def checkUpdate():  # 检查更新(预计于下个版本发布)
-    return "c0.1-RC1"
+    return "c0.1-RC2"
 
 
 # ------核心函数区------
@@ -119,6 +149,8 @@ def loadplugin(rjson, type):  # 载入插件
         name = i.split(".")[0]
         if i.find("disload") == -1 and i != "__pycache__":
             getPlugin = pluginLoad(name)
+            if not os.listdir("./config").count(getPlugin.PLUGINFO["name"]):
+                os.mkdir("./config/%s"%getPlugin.PLUGINFO["name"])
             log = getLog(getPlugin.PLUGINFO["name"])
             if thread:
                 createThread(runPlugin, (getPlugin, rjson, type, log))
@@ -167,6 +199,7 @@ def initRun():  # 初始化运行
 
 
 def initData(json):  # 处理消息数据
+    rjson={"msgtype":None}
     time = json["time"]
     ptype = json["post_type"]
     if ptype == "message":
