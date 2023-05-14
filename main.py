@@ -16,4 +16,4 @@ def main():
 
 
 app.debug = bot.debug
-app.run(host=bot.initHost, port=bot.initPort)#启动监听
+app.run(host=bot.initHost, port=bot.initPort)
