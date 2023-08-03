@@ -1,8 +1,9 @@
 # SimpQ-Bot #
 ![LOGO](/doc/LOGO23-4.png "LOGO")
 
-## 停止更新维护,请使用SimpQ-Ref项目
-## 新框架可以安装UmiLegacy以兼容本项目插件
+**停止更新维护,请使用SimpQ-Ref项目**
+
+**新框架可以安装UmiLegacy以兼容本项目插件**
 
 Plugins:[插件仓库](https://github.com/CNlongY-Py/SimpQ-Plugin/)
 
