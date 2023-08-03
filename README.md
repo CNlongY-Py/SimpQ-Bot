@@ -1,6 +1,10 @@
 # SimpQ-Bot #
 ![LOGO](/doc/LOGO23-4.png "LOGO")
 
+## 停止更新维护,请使用SimpQ-Ref项目
+
+## 新框架可以安装UmiLegacy以兼容本项目插件
+
 Plugins:[插件仓库](https://github.com/CNlongY-Py/SimpQ-Plugin/)
 
 QQGroup:[SimpQ 社区 556990446](https://qm.qq.com/cgi-bin/qm/qr?k=d5jHYYrg1XkSwuvItCCWfWxcALOxqAeM&jump_from=webapi&authKey=Qtw/AoANvNmCcSeSH9IqafXqbToZRE5aFuUtZuWJpKMmVaALfw2P9zp8orX6czjZ)
